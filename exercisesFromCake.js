@@ -49,23 +49,38 @@ function canTwoMoviesFillFlight(movieLengths, flightLength) {
 // "civil" should return false
 // "livci" should return false
 
+// function isPalindrone(string) {
+
+//   string = string.toLowerCase()
+//   const count = {};
+//   let odd = 0
+
+//   for (let i = 0; i < string.length; i++) {
+//     if (count[string[i]]) count[string[i]]++
+//     else count[string[i]] = 1
+//   }
+
+//   for (el in count) {
+//     if (count[el] % 2 === 1) odd++
+//     if (odd > 1) {
+//       return false
+//     }
+//   }
+
+//   return true;
+// }
+
+//new simplified answer using sets
 function isPalindrone(string) {
 
   string = string.toLowerCase()
-  const count = {};
+  const count = new Set();
   let odd = 0
 
   for (let i = 0; i < string.length; i++) {
-    if (count[string[i]]) count[string[i]]++
-    else count[string[i]] = 1
+    if (count.has(string[i])) count.delete(string[i])
+    else count.add(string[i])
   }
 
-  for (el in count) {
-    if (count[el] % 2 === 1) odd++
-    if (odd > 1) {
-      return false
-    }
-  }
-
-  return true;
+  return count.size <= 1;
 }
