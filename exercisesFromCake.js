@@ -84,3 +84,34 @@ function isPalindrone(string) {
 
   return count.size <= 1;
 }
+
+//You want to build a word cloud, an infographic where the size of a word corresponds to how often it appears in the body of text.
+
+// To do this, you'll need data. Write code that takes a long string and builds its word cloud data in a map ↴ , where the keys are words and the values are the number of times the words occurred.
+
+function size(text) {
+  const wordSize = {}
+  text = isLetter(text.toLowerCase()).split(' ')
+  text.forEach(word => {
+    if (wordSize[word]) wordSize[word]++
+    else if (word.length !== 0) wordSize[word] = 1
+  })
+
+  return wordSize
+
+}
+
+function isLetter(string) {
+  var alphabet = 'abcdefghijklmopqrstuvwxyz'
+  let result = ''
+  for (var i = 0; i < string.length; i++) {
+    var char = string[i]
+    if (alphabet.includes(char)) result += char
+    else result += ' '
+
+  }
+  return result
+}
+// run your function through some test cases here
+// remember: debugging is half the battle!
+console.log(size("We came, we saw, we conquered...then we ate Bill's (Mille-Feuille) cake. The bill came to five dollars."));
