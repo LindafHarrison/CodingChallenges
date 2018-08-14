@@ -115,3 +115,45 @@ function isLetter(string) {
 // run your function through some test cases here
 // remember: debugging is half the battle!
 console.log(size("We came, we saw, we conquered...then we ate Bill's (Mille-Feuille) cake. The bill came to five dollars."));
+
+
+function sortScores(unorderedScores, highestPossibleScore) {
+
+  var sortedScore = new Array(highestPossibleScore)
+  var result = []
+
+  unorderedScores.forEach(score => {
+    if (sortedScore[score]) sortedScore[score]++
+    else sortedScore[score] = 1
+  })
+
+  for (var score = highestPossibleScore; score >= 0; score--) {
+
+    if (sortedScore[score]) {
+      let count = sortedScore[score]
+      while (count > 0) {
+        result.push(score)
+        count--
+      }
+    }
+  }
+
+  return result;
+}
+
+
+// You created a game that is more popular than Angry Birds.
+
+// Each round, players receive a score between 0 and 100, which you use to rank them from highest to lowest. So far you're using an algorithm that sorts in O(n\lg{n})O(nlgn) time, but players are complaining that their rankings aren't updated fast enough. You need a faster sorting algorithm.
+
+// Write a function that takes:
+
+// an array of unsortedScores
+// the highestPossibleScore in the game
+// and returns a sorted array of scores in less than O(n\lg{n})O(nlgn) time.
+
+// run your function through some test cases here
+// remember: debugging is half the battle!
+var unsortedScores = [37, 89, 41, 65, 91, 53, 100, 0, 100, 91, 91];
+const HIGHEST_POSSIBLE_SCORE = 100;
+console.log(sortScores(unsortedScores, HIGHEST_POSSIBLE_SCORE));
