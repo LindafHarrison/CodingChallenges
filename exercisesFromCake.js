@@ -172,16 +172,17 @@ console.log(sortScores(unsortedScores, HIGHEST_POSSIBLE_SCORE));
 
 function getMaxProfit(stockPrices) {
 
-  if (stockPrices.length < 2) throw Error('not enough stock prices')
+  if (stockPrices.length < 2) throw new Error('not enough stock prices')
 
   let maxProfit = Number.NEGATIVE_INFINITY
+  let minPrice = stockPrices[0]
 
-  for (var i = 0; i < stockPrices.length; i++) {
-    let buy = stockPrices[i]
-    for (var j = i + 1; j < stockPrices.length; j++) {
-      let sell = stockPrices[j]
-      if (sell - buy > maxProfit) maxProfit = sell - buy
-    }
+  for (var i = 1; i < stockPrices.length; i++) {
+    let current = stockPrices[i]
+    let potentialProfit = current - minPrice
+    minPrice = Math.min(minPrice, current)
+    maxProfit = Math.max(maxProfit, potentialProfit)
+
   }
 
   return maxProfit
@@ -192,8 +193,8 @@ function getMaxProfit(stockPrices) {
 // Tests
 
 let desc = 'price goes up then down';
-let actual = getMaxProfit([1, 5, 3, 2]);
-let expected = 4;
+let actual = getMaxProfit([1, 5, 3, 7, 0]);
+let expected = 6;
 assertEqual(actual, expected, desc);
 
 desc = 'price goes down then up';
