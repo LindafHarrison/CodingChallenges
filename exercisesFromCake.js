@@ -241,3 +241,52 @@ function assertThrowsError(func, desc) {
     console.log(`${desc} ... PASS`);
   }
 }
+
+// You have an array of integers, and for each index you want to find the product of every integer except the integer at that index.
+
+// Write a function getProductsOfAllIntsExceptAtIndex() that takes an array of integers and returns an array of the products.
+
+// For example, given:
+
+//   [1, 7, 3, 4]
+
+// your function would return:
+
+//   [84, 12, 28, 21]
+
+// by calculating:
+
+//   [7 * 3 * 4,  1 * 3 * 4,  1 * 7 * 4,  1 * 7 * 3]
+
+
+
+function getProductsOfAllIntsExceptAtIndex(intArray) {
+
+  if (intArray.length < 2) throw new Error('array too small or empty')
+  let result = []
+  let totalProduct = 1
+  let save = 1
+  let zeroCount = 0
+  // Make a list of the products
+  for (var i = 0; i < intArray.length; i++) {
+    if (intArray[i] !== 0) {
+      totalProduct *= intArray[i]
+      save *= intArray[i]
+    }
+    else {
+      totalProduct *= intArray[i]
+      zeroCount++
+    }
+  }
+
+  for (var j = 0; j < intArray.length; j++) {
+    if (zeroCount > 1) {
+      result.push(0)
+      continue
+    }
+    if (intArray[j] === 0) result.push(save)
+    else result.push(totalProduct / intArray[j])
+  }
+
+  return result;
+}
