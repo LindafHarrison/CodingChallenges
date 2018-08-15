@@ -290,3 +290,35 @@ function getProductsOfAllIntsExceptAtIndex(intArray) {
 
   return result;
 }
+
+
+
+// Write a function for doing an in-place ↴ shuffle of an array.
+
+// The shuffle must be "uniform," meaning each item in the original array must have the same probability of ending up in each spot in the final array.
+
+// Assume that you have a function getRandom(floor, ceiling) for getting a random integer that is >= floor and <= ceiling.
+
+function inPlaceShuffle(array) {
+
+  if (array.length <= 1) return
+  // write the body of your function here
+  for (var i = 0; i < array.length; i++) {
+    let temp = array[i]
+    let random = getRandom(i, array.length - 1)
+
+    if (i !== random) {
+      array[i] = array[random]
+      array[random] = temp
+    }
+  }
+
+  return array;
+}
+
+function getRandom(floor, ceiling) {
+  return Math.round(Math.random() * (ceiling - floor) + floor);
+}
+// run your function through some test cases here
+// remember: debugging is half the battle!
+console.log(inPlaceShuffle([1, 2, 3, 4, 5, 6]));
